@@ -8,7 +8,7 @@ describe('Buy Advertisement', () => {
 			slowMo: 200,
 		});
 		const page = await browser.newPage();
-		await page.goto('https://storiesgain.com/');
+		await page.goto('https://storiesgain.com/customer');
 
 		const loginButton = (
 			await page.$x('//*[@data-user-type="blogger"]')
@@ -36,20 +36,24 @@ describe('Buy Advertisement', () => {
 			await button.click();
 		}
 
-		// 2. START FILLING THE "BUY ADVERTISEMENT" TAB
-
-		//***Wait for the validation code to be entered***
-
-		await page.waitFor(15000);
-
-		const advertisementTab = await page.$x(
-			"//a[contains(., 'Buy advertisement')]"
+		await page.waitForSelector(
+			'input[placeholder="Enter the code (5 digits)"]'
+		);
+		await page.type(
+			'input[placeholder="Enter the code (5 digits)"]',
+			'11111'
 		);
 
-		console.log(advertisementTab);
+		page.waitForNavigation();
+
+		// 2. SELECT "BUY ADVERTISEMENT" TAB AND FILL THE NAME OF THE ADVERTISEMENT AND ITS CONTENT TYPE
+
+		const [advertisementTab] = await page.$x(
+			"//div[@class='main-menu']/a[contains(., 'Buy advertisement')]"
+		);
 
 		if (advertisementTab) {
-			await button.click();
+			await advertisementTab.click();
 		}
 	});
 });
