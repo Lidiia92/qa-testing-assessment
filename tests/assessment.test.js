@@ -53,8 +53,6 @@ describe('Buy Advertisement', () => {
 			"//div[@class='main-menu']/a[contains(., 'Buy advertisement')]"
 		);
 
-		console.log(advertisementTab);
-
 		if (advertisementTab) {
 			await advertisementTab.click();
 		}
