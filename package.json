@@ -4,7 +4,7 @@
 	"description": "Completion of QA Engineer Test",
 	"main": "index.js",
 	"scripts": {
-		"test": "node ./node_modules/mocha/bin/mocha --timeout=100000 ./tests"
+		"test": "node ./node_modules/mocha/bin/mocha --timeout=120000 ./tests"
 	},
 	"repository": {
 		"type": "git",
