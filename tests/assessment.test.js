@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 describe('Buy Advertisement', () => {
-	it('should fill the name of the advertisement and the content type', async function () {
+	it('should fill the name of the advertisement', async function () {
 		//1. LOGIN INTO THE APPLICATION
 		const browser = await puppeteer.launch({
 			headless: false,
@@ -46,14 +46,27 @@ describe('Buy Advertisement', () => {
 
 		page.waitForNavigation();
 
-		// 2. SELECT "BUY ADVERTISEMENT" TAB AND FILL THE NAME OF THE ADVERTISEMENT AND ITS CONTENT TYPE
+		// 2. SELECT "BUY ADVERTISEMENT" TAB AND FILL THE NAME OF THE ADVERTISEMENT
 
+		await page.waitForSelector('.user-menu__username');
 		const [advertisementTab] = await page.$x(
 			"//div[@class='main-menu']/a[contains(., 'Buy advertisement')]"
 		);
 
+		console.log(advertisementTab);
+
 		if (advertisementTab) {
 			await advertisementTab.click();
 		}
+
+		await page.waitForSelector(
+			'input[placeholder="Bloggers will see title"]'
+		);
+		await page.type(
+			'input[placeholder="Bloggers will see title"]',
+			'Test Name'
+		);
+
+		await browser.close();
 	});
 });
